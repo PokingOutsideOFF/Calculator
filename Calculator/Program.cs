@@ -14,8 +14,9 @@ namespace CalculatorProgram
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
 
-            Calculator calculator = new Calculator();   
+            Calculator calculator = new Calculator();
 
+            int timesUsed = 0;
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -82,9 +83,12 @@ namespace CalculatorProgram
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
                 if (Console.ReadLine() == "n") endApp = true;
-
+                timesUsed++;
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
+
+            Console.WriteLine($"The calculator was used {timesUsed} times");
+
             // Add call to close the JSON writer before return
             calculator.Finish();
             return;

@@ -6,6 +6,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        List<string> calculationList = new List<string>();
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -31,21 +32,25 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = num1 + num2;
+                    calculationList.Add($"{num1} + {num2} = {result}");
                     writer.WriteValue("Add");
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
+                    calculationList.Add($"{num1} - {num2} = {result}");
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    calculationList.Add($"{num1} * {num2} = {result}");
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        calculationList.Add($"{num1} / {num2} = {result}");
                         writer.WriteValue("Divide");
                     }
                     break;
