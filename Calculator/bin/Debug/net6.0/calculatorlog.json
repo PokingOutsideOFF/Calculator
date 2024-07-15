@@ -7,16 +7,22 @@
       "Result": 24.0
     },
     {
-      "Operand 1": 34.0,
-      "Operand 2": 56.0,
-      "Operation": "Subtract",
-      "Result": -22.0
+      "Operand 1": 24.0,
+      "Operand 2": 13.0,
+      "Operation": "Add",
+      "Result": 37.0
     },
     {
-      "Operand 1": 564343.0,
-      "Operand 2": 2131.423,
-      "Operation": "Divide",
-      "Result": 264.77287708727926
+      "Operand 1": 34.0,
+      "Operand 2": 67.0,
+      "Operation": "Subtract",
+      "Result": -33.0
+    },
+    {
+      "Operand 1": 24.0,
+      "Operand 2": 98.0,
+      "Operation": "Multiply",
+      "Result": 2352.0
     }
   ]
 }

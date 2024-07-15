@@ -65,6 +65,34 @@ namespace CalculatorLibrary
             return result;
         }
 
+        public void ViewCalculation()
+        {
+            int i = 1;
+            for (int item = calculationList.Count - 1; item >= 0; item--)
+            {
+                Console.WriteLine($"{i}. {calculationList[item]}");
+                i++;
+            }
+       
+            Console.WriteLine();
+        }
+
+        public int GetListLength()
+        {
+            return calculationList.Count;
+        }
+
+        public double GetResult(int i)
+        {
+            calculationList.Reverse();
+            string s = calculationList[i - 1];
+            s = s.Substring(s.IndexOf("= ") + 1);
+            calculationList.Reverse();
+            return Double.Parse(s);
+        }
+
+
+
         public void Finish()
         {
             writer.WriteEndArray();
