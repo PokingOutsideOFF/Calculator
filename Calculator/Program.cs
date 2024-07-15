@@ -35,12 +35,12 @@ namespace CalculatorProgram
         }
         bool UsePastResult()
         {
-            Console.Write("Want to use past result? Press y to use past result or press any other key to continue: ");
+            Console.Write("\nWant to use past result? Press y to use past result or press any other key to continue: ");
             if (Console.ReadLine() == "y") return true;
             return false;
         }
 
-        void Input(bool usePastResult = false)
+        void Input(bool usePastResult, bool singleInput)
         {
             string? numInput1 = "";
             string? numInput2 = "";
@@ -62,17 +62,19 @@ namespace CalculatorProgram
                 cleanNum1 = PastResult();
                 
             }
-            
 
-            // Ask the user to type the second number.
-            Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
-
-            cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
+            if (!singleInput)
             {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
+                // Ask the user to type the second number.
+                Console.Write("Type another number, and then press Enter: ");
                 numInput2 = Console.ReadLine();
+
+                cleanNum2 = 0;
+                while (!double.TryParse(numInput2, out cleanNum2))
+                {
+                    Console.Write("This is not valid input. Please enter a numeric value: ");
+                    numInput2 = Console.ReadLine();
+                }
             }
         }
 
@@ -97,6 +99,13 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tsqrt - Square Root");
+                Console.WriteLine("\tpow - a^b");
+                Console.WriteLine("\texp - 10^x");
+                Console.WriteLine("\tsin - sine(theta)");
+                Console.WriteLine("\tcos - cosine(theta)");
+                Console.WriteLine("\ttan - tangent(theta)");
+                Console.WriteLine("\tdel - Delete List");
                 Console.Write("Your option? ");
 
                 string? op = Console.ReadLine();
@@ -104,15 +113,30 @@ namespace CalculatorProgram
 
 
                 // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sqrt|pow|exp|sin|cos|tan|del]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
                 else
                 {
+                    if(op == "del")
+                    {
+                        Console.WriteLine("------------------------\n");
+                        calculator.EmptyList();
+                        Console.WriteLine("------------------------\n");
+                        Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                        if (Console.ReadLine() == "n") break;
+                        continue;
+                    }
                     try
                     {
-                        Input(pastResult);
+                        bool singleInput = false;
+                        if(op == "sqrt" || op == "exp" || op == "sin" || op == "cos" || op == "tan")
+                        {
+                            singleInput = true;
+                            
+                        }
+                        Input(pastResult, singleInput);
                         result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                         if (double.IsNaN(result))
                         {

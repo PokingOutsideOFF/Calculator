@@ -55,6 +55,36 @@ namespace CalculatorLibrary
                     }
                     break;
                 // Return text for an incorrect option entry.
+                case "sqrt":
+                    result = Math.Sqrt(num1);
+                    calculationList.Add($"{num1}^(1/2) = {result}");
+                    writer.WriteValue("Square root");
+                    break;
+                case "pow":
+                    result = Math.Pow(num1, num2);
+                    calculationList.Add($"{num1}^{num2} = {result}");
+                    writer.WriteValue("Taking the Power");
+                    break;
+                case "exp":
+                    result = Math.Pow(10, num1);
+                    calculationList.Add($"10^{num1} = {result}");
+                    writer.WriteValue("10x");
+                    break;
+                case "sin":
+                    result = Math.Sin(num1);
+                    calculationList.Add($"sin({num1}) = {result}");
+                    writer.WriteValue("Sine");
+                    break;
+                case "cos":
+                    result = Math.Cos(num1);
+                    calculationList.Add($"cos({num1}) = {result}");
+                    writer.WriteValue("Cosine");
+                    break;
+                case "tan":
+                    result = Math.Tan(num1);
+                    calculationList.Add($"tan({num1}) = {result}");
+                    writer.WriteValue("Tangent");
+                    break;
                 default:
                     break;
             }
@@ -73,7 +103,8 @@ namespace CalculatorLibrary
                 Console.WriteLine($"{i}. {calculationList[item]}");
                 i++;
             }
-       
+            Console.WriteLine("\n------------------------\n");
+
             Console.WriteLine();
         }
 
@@ -91,6 +122,16 @@ namespace CalculatorLibrary
             return Double.Parse(s);
         }
 
+        public void EmptyList()
+        {
+            if (calculationList.Count == 0)
+                Console.WriteLine("List is empty");
+            else
+            {
+                calculationList.Clear();
+                Console.WriteLine("List cleared");
+            }
+        }
 
 
         public void Finish()
